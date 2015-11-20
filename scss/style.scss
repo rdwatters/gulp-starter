@@ -1,7 +1,17 @@
+@import "bourbon/bourbon";
+@import "neat/neat";
 @import "partials/partials";
 
-.myClass {
-	transition: all .4s ease-in-out;
-	color:orange;
+h1 {
+	color: red;
+}
+
+main > div {
+	@include outer-container;
+	height:200px;
+	section {
+		@include span-columns(6);
+		background-color:#01589B;
+	}
 }
 

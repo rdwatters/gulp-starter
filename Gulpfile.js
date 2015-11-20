@@ -46,10 +46,10 @@ gulp.task('serve', ['sass','scripts'], function() {
     gulp.watch("js/main.js").on('change', browserSync.reload);
     gulp.watch("*.html").on('change', browserSync.reload);
     // watch css and stream to BrowserSync when it changes
-    gulp.watch('css/styles.min.css', function() {
+    gulp.watch('css/style.min.css', function() {
       // grab css files and send them into browserSync.stream
       // this injects the css into the page rather than causing a full page refresh
-      gulp.src('css/styles.min.css')
+      gulp.src('css/style.min.css')
         .pipe(browserSync.stream());
     });
 });
