@@ -1,6 +1,6 @@
 # gulp-starter
 
-This is a basic gulp starter with browser-sync, gulp-sass (with bourbon and neat mixins), live-reload (with css injection), local server (localhost:3000), js concat/uglify, and some very basic starter partials/reset for sass.
+This is a basic gulp starter with browser-sync, gulp-sass (with bourbon and neat mixins), live-reload (with css injection), local server (localhost:3000), js concat/uglify, Babel (ES 2015 transpilation), and some very basic starter partials/reset for sass.
 
 ## Requirements
 

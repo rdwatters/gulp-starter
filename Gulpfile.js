@@ -2,6 +2,7 @@ var gulp = require('gulp');
  
 // Include Plugins
 var browserSync = require('browser-sync').create();
+var babel = require('gulp-babel');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
@@ -21,6 +22,9 @@ gulp.task('sass', function () {
 // Concatenate & Minify JS
 gulp.task('scripts', function () {
     return gulp.src('js/scripts/*js')
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(concat('main.js'))
         .pipe(gulp.dest('js'))
         .pipe(rename('main.min.js'))
