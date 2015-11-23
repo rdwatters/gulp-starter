@@ -6,6 +6,10 @@ $L:960px;
 $XL:1200px;
 $HUGE:1600px;
 
+$mobile: new-breakpoint(max-width $SM);
+$tablet: new-breakpoint(min-width 561px);
+$desktop: new-breakpoint(min-width $L 4);
+
 //TYPOGRAPHY
 $base-font-size:16px;
 $base-font-color:#333333;

@@ -1,17 +1,51 @@
 @import "bourbon/bourbon";
 @import "neat/neat";
 @import "partials/partials";
-
-h1 {
-	color: red;
+header {
+    width: 100%;
+    height:36px;
+    color: white;
+    background-color: #333333;
+    margin-bottom: 10px;
+    form {
+    	display:inline-block;
+    	float:right;
+    	position:fixed;
+    	top: 10px;
+    	left:10px;
+    	height: 24px;
+    }
 }
 
-main > div {
-	@include outer-container;
-	height:200px;
-	section {
-		@include span-columns(6);
-		background-color:#01589B;
-	}
+main {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    @include media ($tablet){
+    	max-width: $main-content-max-size;
+    }
 }
 
+div.row {
+    @include display(flex);
+    @include justify-content(space-around);
+    height: auto;
+    min-height: 100px;
+    background-color:yellow;
+    section {
+        @include display(flex);
+        @include flex-direction(column);
+        flex-grow:1;
+        height: auto;
+        background-color: #01589B;
+        h2 {
+        		@include align-self(flex-start);
+        		width:100%;
+        		text-align:center;
+            color: white;
+        }
+        @include media($tablet) {
+            max-width: 30%;
+        }
+    }
+}
