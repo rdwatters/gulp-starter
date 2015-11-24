@@ -80,6 +80,8 @@ input[type=search] {
     appearance: none;
     -webkit-border-radius: 0px;
     border-radius: 0px;
+    border: 0;
+    border: none;
 }
 
 input[type=text] {
@@ -94,21 +96,25 @@ input[type=text] {
 ::-webkit-input-placeholder {
     color: $placeholder-text-color;
     opacity: $placeholder-text-opacity!important;
+    font-size: $placeholder-text-font-size!important;
 }
 
 :-moz-placeholder {
     /* Firefox 18- */
     color: $placeholder-text-color;
     opacity: $placeholder-text-opacity!important;
+    font-size: $placeholder-text-font-size!important;
 }
 
 ::-moz-placeholder {
     /* Firefox 19+ */
     color: $placeholder-text-color;
     opacity: $placeholder-text-opacity!important;
+    font-size: $placeholder-text-font-size!important;
 }
 
 :-ms-input-placeholder {
     color: $placeholder-text-color;
     opacity: $placeholder-text-opacity!important;
+    font-size: $placeholder-text-font-size!important;
 }

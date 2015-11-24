@@ -21,8 +21,8 @@ if (!String.prototype.endsWith) {
       return lastIndex !== -1 && lastIndex === position;
   };
 }
-//classList.js polyfill
-/*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js*/ ;
+//http://purl.eligrey.com/github/classList.js/blob/master/classList.js
+
 if ("document" in self && !("classList" in document.createElement("_"))) {
     (function(j) {
         "use strict";

@@ -1,4 +1,4 @@
-//MEDIA QUERIES
+//MEDIA QUERY VALUES
 $S:480px;
 $SM: 560px;
 $M:760px;
@@ -6,6 +6,7 @@ $L:960px;
 $XL:1200px;
 $HUGE:1600px;
 
+//SETTING BREAKPOINTS FOR NEAT (see http://thoughtbot.github.io/neat-docs/latest/)
 $mobile: new-breakpoint(max-width $SM);
 $tablet: new-breakpoint(min-width 561px);
 $desktop: new-breakpoint(min-width $L 4);
@@ -15,8 +16,9 @@ $base-font-size:16px;
 $base-font-color:#333333;
 
 //INPUTS
-$placeholder-text-color: #666666;
-$placeholder-text-opacity: 0.8;
+$placeholder-text-color: white;
+$placeholder-text-opacity: 1;
+$placeholder-text-font-size: 12px;
 
 //CONTENT SIZING for <main id="main" role="main">
 $main-content-max-size-mobile: 90%;
