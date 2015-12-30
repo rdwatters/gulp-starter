@@ -22,7 +22,7 @@ You'll need the following to get this to work:
 
 * **JavaScript** 
     - Put your JavaScript files in `js/scripts/`.
-    - Feel free to remove jQuery from `js/scripts/` if you do not need it.
+    - Feel free to remove jQuery from `js/scripts/` if you do not need it, especially since this will slow down and de-optimize transpilation of ES6 and Babel in the build process. 
 * **SASS**
     - The latest version of Bourbon and Neat are included with the clone and do not require additional install
     - [Bourbon documentation](http://bourbon.io/docs/)
