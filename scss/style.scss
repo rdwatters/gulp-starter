@@ -2,28 +2,5 @@
 @import "neat/neat";
 @import "partials/partials";
 body {
-    display: flex;
-    flex-direction: column;
-}
 
-header {
-    display:flex;
-    align-items: center;
-    background-color: #01589B;
-    height: 50px;
-    padding-right: 15px;
-    padding-left: 15px;
-    form {
-        display: flex;
-        input {
-            outline:none;
-            height: 100%;
-            appearance: none;
-            background-color:inherit;
-            color:white;
-            &:focus {
-                color:white;
-            }
-        }
-    }
 }

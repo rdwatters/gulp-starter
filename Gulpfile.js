@@ -9,6 +9,7 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
+var cleanCSS = require('gulp-clean-css');
 
 // Compile Sass; note sass options to prevent server from breaking when you fudge a css rule
 gulp.task('sass', function() {
@@ -18,10 +19,7 @@ gulp.task('sass', function() {
       outputStyle: 'compressed',
       errToConsole: true
     }))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions'],
-      cascade: false
-    }))
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest('css'));
 });
