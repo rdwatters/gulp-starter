@@ -1,9 +1,5 @@
-/**
- * myFunction is just me testing to see if documentation.js is actually working
- * @param {number} number  
- * @returns Any number + 1 to the console.
- */
-function myFunction (number) {
-	console.log(number + 1);
+document.querySelector('section > header').addEventListener('click', showLog, false);
+
+function showLog() {
+    console.log("hi!");
 }
-myFunction(11);

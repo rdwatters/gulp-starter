@@ -1,6 +1,3 @@
 @import "bourbon/bourbon";
 @import "neat/neat";
-@import "partials/partials";
-body {
-
-}
+@import "partials/partials"; //include media queries mixin, mixins.scss, reset, and variables

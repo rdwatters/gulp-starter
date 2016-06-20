@@ -10,10 +10,12 @@ $HUGE:1600px;
 $mobile: new-breakpoint(max-width $SM);
 $tablet: new-breakpoint(min-width 561px);
 $desktop: new-breakpoint(min-width $L 4);
+$extralarge: new-breakpoint(min-width $XL 4);
 
 //TYPOGRAPHY
 $base-font-size:16px;
 $base-font-color:#333333;
+$base-font-family:'Proxima Nova',Arial,'helvetica neue',helvetica,sans-serif;
 
 //INPUTS
 $placeholder-text-color: white;
@@ -22,7 +24,7 @@ $placeholder-text-font-size: 12px;
 
 //CONTENT SIZING for <main id="main" role="main">
 $main-content-max-size-mobile: 90%;
-$main-content-max-size: 760px;
+$main-content-max-width: 760px;
 
 //SOCIAL MEDIA COLORS
 $twitter:#00aced;

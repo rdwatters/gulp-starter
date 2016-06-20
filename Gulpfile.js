@@ -19,7 +19,7 @@ gulp.task('sass', function() {
       outputStyle: 'compressed',
       errToConsole: true
     }))
-    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(cleanCSS({compatibility: 'ie10'}))
     .pipe(rename('style.min.css'))
     .pipe(gulp.dest('css'));
 });
@@ -47,7 +47,7 @@ gulp.task('serve', ['sass', 'scripts'], function() {
     open: true
   });
 
-  gulp.watch("scss/*.scss", ['sass']);
+  gulp.watch("scss/**/*.scss", ['sass']);
   gulp.watch("js/scripts/*.js", ['scripts']);
   gulp.watch("js/main.min.js").on('change', browserSync.reload);
   gulp.watch("*.html").on('change', browserSync.reload);
