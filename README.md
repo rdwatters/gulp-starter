@@ -1,6 +1,6 @@
 # gulp-starter
 
-This is a basic gulp starter with browser-sync, gulp-sass (with bourbon and neat mixins), live-reload (with css injection), local server (localhost:3000), js concat/uglify, Babel (ES 2015 transpilation), and some very basic starter partials/reset for sass.
+This is a basic gulp starter with browser-sync, gulp-sass (with bourbon and neat mixins), live-reload (with css injection), local server (localhost:3000), js concat/uglify, Babel (ES 2015 transpilation), image resizing (for thumbnail), and some very basic starter partials/reset for sass.
 
 ## Requirements
 
@@ -20,13 +20,13 @@ You'll need the following to get this to work:
 
 ## Notes
 
-* **JavaScript** 
+* **JavaScript**
     - Put your JavaScript files in `js/scripts/`.
-    - Feel free to remove jQuery from `js/scripts/` if you do not need it, especially since this will slow down and de-optimize transpilation of ES6 and Babel in the build process. 
+    - Feel free to remove jQuery from `js/scripts/` if you do not need it, especially since this will slow down and de-optimize transpilation of ES6 and Babel in the build process.
 * **SASS**
     - The latest version of Bourbon and Neat are included with the clone and do not require additional install
     - [Bourbon documentation](http://bourbon.io/docs/)
-    - [Neat documentation](http://thoughtbot.github.io/neat-docs/latest/#fill-parent) 
+    - [Neat documentation](http://thoughtbot.github.io/neat-docs/latest/#fill-parent)
 
 
 
