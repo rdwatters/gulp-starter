@@ -12,10 +12,17 @@ $tablet: new-breakpoint(min-width 561px);
 $desktop: new-breakpoint(min-width $L 4);
 $extralarge: new-breakpoint(min-width $XL 4);
 
+$use-font-face-module:true;
+$use-font-two: false;
+$use-font-three: false;
+$font: 'chaparralpro';
+$font-two: 'futurapt';
+$font-three: 'courierprime';
+
 //TYPOGRAPHY
 $base-font-size:16px;
 $base-font-color:#333333;
-$base-font-family:'Proxima Nova',Arial,'helvetica neue',helvetica,sans-serif;
+$base-font-family:'helvetica neue',helvetica,sans-serif;
 
 //INPUTS
 $placeholder-text-color: white;

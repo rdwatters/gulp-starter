@@ -1,45 +1,71 @@
 var gulp = require('gulp');
 
 // Include Plugins
-var browserSync = require('browser-sync').create();
-var babel = require('gulp-babel');
-var sass = require('gulp-sass');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var plumber = require('gulp-plumber');
-var autoprefixer = require('gulp-autoprefixer');
-var cleanCSS = require('gulp-clean-css');
+const autoprefixer = require('gulp-autoprefixer');
+const babel = require('gulp-babel');
+const browserSync = require('browser-sync').create();
+const concat = require('gulp-concat');
+const gplumber = require('gulp-plumber');
+const gutil = require('gulp-util');
+const imageResize = require('gulp-image-resize');
+const minifycss = require('gulp-minify-css');
+const os = require('os');
+const parallel = require("concurrent-transform");
+const postcss = require('gulp-postcss');
+const rename = require('gulp-rename');
+const sass = require('gulp-sass');
+const sassFiles = 'scss/**/*.scss';
+const uglify = require('gulp-uglify');
+// our custom error handler
+const errorHandler = function(){
+    // default appearance
+    return gplumber(function(error){
+        // add indentation
+        var msg = error.codeFrame.replace(/\n/g, '\n    ');
+        // output styling
+        gutil.log('|- ' + gutil.colors.bgRed.bold('Build Error in ' + error.plugin));
+        gutil.log('|- ' + gutil.colors.bgRed.bold(error.message));
+        gutil.log('|- ' + gutil.colors.bgRed('>>>'));
+        gutil.log('|\n    ' + msg + '\n           |');
+        gutil.log('|- ' + gutil.colors.bgRed('<<<'));
+    });
+};
 
-// Compile Sass; note sass options to prevent server from breaking when you fudge a css rule
-gulp.task('sass', function() {
-  return gulp.src('scss/*.scss')
-    .pipe(plumber())
-    .pipe(sass({
-      outputStyle: 'compressed',
-      errToConsole: true
-    }))
-    .pipe(cleanCSS({compatibility: 'ie10'}))
-    .pipe(rename('style.min.css'))
-    .pipe(gulp.dest('css'));
+gulp.task('sass', () => {
+  return gulp.src(sassFiles)
+        .pipe(errorHandler())
+        .pipe(sass({ outputStyle: 'compressed', errToConsole: true }))
+        .pipe(autoprefixer({ browsers: 'last 3 versions' }))
+        .pipe(minifycss())
+        .pipe(rename('style.min.css'))
+        .pipe(gulp.dest('css/'));
 });
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
   return gulp.src('js/scripts/*js')
-    .pipe(concat('main.js'))
+    .pipe(errorHandler())
+    .pipe(concat('main.min.js'))
     .pipe(gulp.dest('js'))
     .pipe(babel({
       presets: ['es2015']
     }))
     .pipe(uglify())
-    .pipe(rename('main.min.js'))
     .pipe(gulp.dest('js'));
 });
 
-//browser-sync setup--will become your default task
-gulp.task('serve', ['sass', 'scripts'], function() {
+gulp.task("thumbnails", function() {
+  return gulp.src("images/*.{jpg,png,jpeg}")
+        .pipe(parallel(
+            imageResize({ width: 350 }),
+            os.cpus().length
+        ))
+        .pipe(rename(function (path) { path.basename += "-thumb"; }))
+        .pipe(gulp.dest("images/_thumbnail"));
+});
 
+//browser-sync setup--will become your default task
+gulp.task('serve', ['sass', 'scripts', 'thumbnails'], function() {
   browserSync.init({
     server: {
       baseDir: "./"
@@ -47,14 +73,13 @@ gulp.task('serve', ['sass', 'scripts'], function() {
     open: true
   });
 
-  gulp.watch("scss/**/*.scss", ['sass']);
+  gulp.watch(['scss/*.scss', 'scss/partials/*scss'], ['sass']);
   gulp.watch("js/scripts/*.js", ['scripts']);
-  gulp.watch("js/main.min.js").on('change', browserSync.reload);
   gulp.watch("*.html").on('change', browserSync.reload);
+  gulp.watch("js/main.min.js").on('change', browserSync.reload);
+  gulp.watch("images/*.{jpg,png,jpeg}", ['thumbnails']);
   // watch css and stream to BrowserSync when it changes
   gulp.watch('css/style.min.css', function() {
-    // grab css files and send them into browserSync.stream
-    // this injects the css into the page rather than causing a full page refresh
     gulp.src('css/style.min.css')
       .pipe(browserSync.stream());
   });

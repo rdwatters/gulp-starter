@@ -1,3 +1,7 @@
 @import "bourbon/bourbon";
 @import "neat/neat";
-@import "partials/partials"; //include media queries mixin, mixins.scss, reset, and variables
+@import "partials/variables";
+@import "partials/font-face";
+@import "partials/reset";
+@import "partials/mediaqueries";
+@import "partials/mixins";
