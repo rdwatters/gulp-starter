@@ -15,14 +15,14 @@ $extralarge: new-breakpoint(min-width $XL 4);
 $use-font-face-module:true;
 $use-font-two: false;
 $use-font-three: false;
-$font: 'chaparralpro';
+$font: 'proximanova';
 $font-two: 'futurapt';
 $font-three: 'courierprime';
 
 //TYPOGRAPHY
 $base-font-size:16px;
 $base-font-color:#333333;
-$base-font-family:'helvetica neue',helvetica,sans-serif;
+$base-font-family:$font,'helvetica neue',helvetica,sans-serif;
 
 //INPUTS
 $placeholder-text-color: white;
