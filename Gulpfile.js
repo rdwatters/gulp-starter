@@ -37,7 +37,7 @@ gulp.task('sassdoc', function () {
   var options = {
     dest: 'docs',
     verbose: true,
-    basePath: 'https://github.com/rdwatters/gulp-starter'
+    basePath: 'https://github.com/rdwatters/gulp-starter/scss'
   };
 
   return gulp.src('scss/**/*.scss')
