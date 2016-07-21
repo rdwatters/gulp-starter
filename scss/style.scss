@@ -5,3 +5,73 @@
 @import "partials/reset";
 @import "partials/mediaqueries";
 @import "partials/mixins";
+// body {
+//   background-color: rgba(0, 55, 155, 1);
+// }
+
+// main.main {
+//   display: block;
+//   margin-top: 1em;
+//   position: relative;
+//   min-height: 100vh;
+//   color: white;
+//   width: 90%;
+//   max-width: 40em;
+//   @include center;
+// }
+
+// h1.page-title {
+//   display: block;
+//   width: 100%;
+//   text-align: center;
+//   font-size: 7vw;
+//   margin-bottom:.5em;
+//   &:not(.long-title) {
+//     @include MQ(L) {
+//       font-size: 3.5em;
+//     }
+//   }
+//   &:not(.extralong-title){
+//   	@include MQ(L) {
+//       font-size: 3.5em;
+//     }
+//   }
+//   &.long-title {
+//     font-size: 5vw;
+//   }
+//   &.extralong-title {
+//     font-size: 3vw;
+//   }
+// }
+
+// .my-box {
+//   position: relative;
+//   cursor: pointer;
+//   width: 100px;
+//   height: 100px;
+// }
+
+// h2.column-title {
+//   text-align: center;
+//   vertical-align: center;
+//   margin-bottom: .5em;
+//   border-top: 1px solid white;
+//   span {
+//     position: relative;
+//     background-color: rgba(0, 55, 155, 1);
+//     top: -.66em;
+//     padding: 0em .25em;
+//   }
+// }
+
+// div.random-content {
+//   @include MQ(M) {
+//     @include columns(2);
+//     -webkit-perspective: 1;
+//     @include column-gap(50px);
+//   }
+// }
+
+// p {
+//   margin-bottom: 1em;
+// }
