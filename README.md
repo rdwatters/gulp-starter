@@ -25,6 +25,7 @@ You'll need the following to get this to work:
     - The latest version of Bourbon and Neat are included with the clone and do not require additional install
     - [Bourbon documentation](http://bourbon.io/docs/)
     - [Neat documentation](http://thoughtbot.github.io/neat-docs/latest/#fill-parent)
+    - [Sassdocs Documentation Generator](http://sassdoc.com/)
 
 
 

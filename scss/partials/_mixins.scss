@@ -1,6 +1,21 @@
+/// Center element horizontally within parent element; **note:** does not take parameters
+/// @acces public
+/// @example scss - Usage
+///   div.keep-in-middle {
+///     @include center;
+///   }
+/// @example css - CSS Output
+///   div.keep-in-middle {
+///     display:block;
+///     margin-right: auto;
+///     margin-left: auto;
+///   }
+///
+
 @mixin center {
-	margin-right:auto;
-	margin-left:auto;
+  display: block;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 /// Will center the element vertically, horizontally, or both (default). Note that element will be centered in relation to nearest `position: relative;` parent element.
@@ -9,7 +24,6 @@
 ///   Center the element horiztonally
 /// @param {Bool} $vertical [true]
 ///   Center the element vertically
-/// @type Bool
 /// @example scss - Usage
 ///   div.centered {
 ///    @include centerer;
