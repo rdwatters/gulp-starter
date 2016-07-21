@@ -1,1 +1,1 @@
-console.log("Gulp Starter Kit");
+console.log("Gulp Starter Kit Welcome!");

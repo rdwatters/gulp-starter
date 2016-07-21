@@ -5,3 +5,13 @@
 @import "partials/reset";
 @import "partials/mediaqueries";
 @import "partials/mixins";
+
+main.main {
+	width:90%;
+	max-width:35em;
+	@include center;
+	a {
+		color:#01589B;
+		text-decoration:underline;
+	}
+}
