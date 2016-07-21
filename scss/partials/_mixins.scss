@@ -3,6 +3,25 @@
 	margin-left:auto;
 }
 
+/// Will center the element vertically, horizontally, or both (default). Note that element will be centered in relation to nearest `position: relative;` parent element.
+/// @access public
+/// @param {Bool} $horizontal [true]
+///   Center the element horiztonally
+/// @param {Bool} $vertical [true]
+///   Center the element vertically
+/// @type Bool
+/// @example scss - Usage
+///   div.centered {
+///    @include centerer;
+///   }
+///
+/// @example css - CSS Output
+///   div.centered {
+///     position:absolute;
+///     top: 50%;
+///     left: 50%;
+///     transform: translate(-50%, -50%);
+///   }
 @mixin centerer($horizontal: true, $vertical: true) {
   position: absolute;
   @if ($horizontal and $vertical) {

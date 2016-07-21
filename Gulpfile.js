@@ -14,7 +14,9 @@ const parallel = require("concurrent-transform");
 const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
+const sassdoc = require('sassdoc');
 const sassFiles = 'scss/**/*.scss';
+const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
 // our custom error handler
 const errorHandler = function(){
@@ -31,13 +33,26 @@ const errorHandler = function(){
     });
 };
 
+gulp.task('sassdoc', function () {
+  var options = {
+    dest: 'docs',
+    verbose: true,
+    basePath: 'https://github.com/rdwatters/gulp-starter'
+  };
+
+  return gulp.src('scss/**/*.scss')
+    .pipe(sassdoc(options));
+});
+
 gulp.task('sass', () => {
   return gulp.src(sassFiles)
         .pipe(errorHandler())
-        .pipe(sass({ outputStyle: 'compressed', errToConsole: true }))
-        .pipe(autoprefixer({ browsers: 'last 3 versions' }))
+        .pipe(sourcemaps.init())
+        .pipe(sass({ outputStyle: 'expanded', errToConsole: true }))
+        .pipe(autoprefixer())
         .pipe(minifycss())
         .pipe(rename('style.min.css'))
+        .pipe(sourcemaps.write('css/'))
         .pipe(gulp.dest('css/'));
 });
 
@@ -45,12 +60,14 @@ gulp.task('sass', () => {
 gulp.task('scripts', function() {
   return gulp.src('js/scripts/*js')
     .pipe(errorHandler())
+    .pipe(sourcemaps.init())
     .pipe(concat('main.min.js'))
     .pipe(gulp.dest('js'))
     .pipe(babel({
       presets: ['es2015']
     }))
     .pipe(uglify())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('js'));
 });
 
@@ -65,7 +82,7 @@ gulp.task("thumbnails", function() {
 });
 
 //browser-sync setup--will become your default task
-gulp.task('serve', ['sass', 'scripts', 'thumbnails'], function() {
+gulp.task('serve', ['sass', 'scripts', 'thumbnails', 'sassdoc'], function() {
   browserSync.init({
     server: {
       baseDir: "./"
@@ -73,7 +90,7 @@ gulp.task('serve', ['sass', 'scripts', 'thumbnails'], function() {
     open: true
   });
 
-  gulp.watch(['scss/*.scss', 'scss/partials/*scss'], ['sass']);
+  gulp.watch(['scss/*.scss', 'scss/partials/*scss'], ['sass','sassdoc']);
   gulp.watch("js/scripts/*.js", ['scripts']);
   gulp.watch("*.html").on('change', browserSync.reload);
   gulp.watch("js/main.min.js").on('change', browserSync.reload);

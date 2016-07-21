@@ -22,14 +22,17 @@ $font-three: 'courierprime';
 //TYPOGRAPHY
 $base-font-size:16px;
 $base-font-color:#333333;
-$base-font-family:$font,'helvetica neue',helvetica,sans-serif;
+$base-font-family:$font,$helvetica;
+
+//BODY
+$body-bg-color: white;
 
 //INPUTS
 $placeholder-text-color: white;
 $placeholder-text-opacity: 1;
 $placeholder-text-font-size: 12px;
 
-//CONTENT SIZING for <main id="main" role="main">
+//CONTENT SIZING>
 $main-content-max-size-mobile: 90%;
 $main-content-max-width: 760px;
 
