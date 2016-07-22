@@ -1,3 +1,24 @@
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}
+
 /// Center element horizontally within parent element; **note:** does not take parameters
 /// @access public
 /// @example scss - Usage
@@ -14,8 +35,8 @@
 
 @mixin center {
   display: block;
-	margin-right: auto;
-	margin-left: auto;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 /// Will center the element vertically, horizontally, or both (default). Note that element will be centered in relation to nearest `position: relative;` parent element.
@@ -50,3 +71,6 @@
     transform: translate(0, -50%);
   }
 }
+
+
+

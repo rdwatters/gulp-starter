@@ -1,3 +1,4 @@
+//Set font values in abstracts/_variables.scss
 @if $use-font-face-module {
   @font-face {
     font-family: "#{$font}";
@@ -277,3 +278,4 @@
     font-style: italic
   }
 }
+

@@ -9,6 +9,9 @@ You'll need the following to get this to work:
 * Node
 * NPM
 * Gulp
+* ImageMagick and GraphicsMagick (for [gulp-image-resize](https://www.npmjs.com/package/gulp-image-resize))
+
+> Both imagemagick and graphicsmagick can be install with homebrew using `brew install imagemagick` and `brew install graphicsmagick`
 
 ## Getting Started
 
