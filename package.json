@@ -1,9 +1,9 @@
 {
-  "name": "GULP STARTER KIT",
-  "version": "",
-  "description": "Gulpy Sassy Workflow for Front-end Dev",
+  "name": "gulp-starter",
+  "version": "0.0.1",
+  "description": "Sassy and Babelly Gulp Workflow for Front-end Development",
   "main": "Gulpfile.js",
-  "repository": "https://github.com/rdwatters",
+  "repository": "https://github.com/rdwatters/gulp-starter",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

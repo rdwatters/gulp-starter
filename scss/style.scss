@@ -6,10 +6,11 @@
 @import 'neat/neat';
 
 // 1. Configuration and helpers
-@import 'abstracts/variables';
+@import 'variables';
+@import 'abstracts/mediaqueries';
 @import 'abstracts/functions';
 @import 'abstracts/mixins';
-@import 'abstracts/mediaqueries';
+
 
 // 2. Base styles
 @import 'base/normalize';

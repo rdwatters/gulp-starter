@@ -19,9 +19,9 @@ const sassFiles = 'scss/**/*.scss';
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
 // our custom error handler
-const errorHandler = function(){
+const errorHandler = function() {
     // default appearance
-    return gplumber(function(error){
+    return gplumber(function(error) {
         // add indentation
         var msg = error.codeFrame.replace(/\n/g, '\n    ');
         // output styling
@@ -33,19 +33,19 @@ const errorHandler = function(){
     });
 };
 
-gulp.task('sassdoc', function () {
-  var options = {
-    dest: 'docs',
-    verbose: true,
-    basePath: 'https://github.com/rdwatters/gulp-starter/tree/master/scss'
-  };
+gulp.task('sassdoc', function() {
+    var options = {
+        dest: 'docs',
+        verbose: true,
+        basePath: 'https://github.com/rdwatters/gulp-starter/tree/master/scss'
+    };
 
-  return gulp.src('scss/**/*.scss')
-    .pipe(sassdoc(options));
+    return gulp.src('scss/**/*.scss')
+        .pipe(sassdoc(options));
 });
 
 gulp.task('sass', () => {
-  return gulp.src(sassFiles)
+    return gulp.src(sassFiles)
         .pipe(errorHandler())
         .pipe(sourcemaps.init())
         .pipe(sass({ outputStyle: 'expanded', errToConsole: true }))
@@ -58,48 +58,56 @@ gulp.task('sass', () => {
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
-  return gulp.src('js/scripts/*js')
-    .pipe(errorHandler())
-    .pipe(sourcemaps.init())
-    .pipe(concat('main.min.js'))
-    .pipe(gulp.dest('js'))
-    .pipe(babel({
-      presets: ['es2015']
-    }))
-    .pipe(uglify())
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('js'));
+    return gulp.src('js/scripts/*js')
+        .pipe(errorHandler())
+        .pipe(sourcemaps.init())
+        .pipe(concat('main.min.js'))
+        .pipe(gulp.dest('js'))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('js'));
 });
 
-gulp.task("thumbnails", function() {
-  return gulp.src("images/*.{jpg,png,jpeg}")
+gulp.task("image-resize", function() {
+    return gulp.src("img-source/*.{jpg,png}")
         .pipe(parallel(
-            imageResize({ width: 350 }),
+            imageResize({ width: 1400 }),
             os.cpus().length
         ))
-        .pipe(rename(function (path) { path.basename += "-thumb"; }))
-        .pipe(gulp.dest("images/_thumbnail"));
+        .pipe(gulp.dest("images"))
+        .pipe(parallel(
+            imageResize({ width: 600 }),
+            os.cpus().length
+        ))
+        .pipe(gulp.dest("images/half"))
+        .pipe(parallel(
+            imageResize({ width: 300 }),
+            os.cpus().length
+        ))
+        .pipe(gulp.dest("images/thumbs"));
 });
 
 //browser-sync setup--will become your default task
-gulp.task('serve', ['sass', 'scripts', 'thumbnails', 'sassdoc'], function() {
-  browserSync.init({
-    server: {
-      baseDir: "./"
-    },
-    open: true
-  });
-
-  gulp.watch(['scss/*.scss', 'scss/partials/*scss'], ['sass','sassdoc']);
-  gulp.watch("js/scripts/*.js", ['scripts']);
-  gulp.watch("*.html").on('change', browserSync.reload);
-  gulp.watch("js/main.min.js").on('change', browserSync.reload);
-  gulp.watch("images/*.{jpg,png,jpeg}", ['thumbnails']);
-  // watch css and stream to BrowserSync when it changes
-  gulp.watch('css/style.min.css', function() {
-    gulp.src('css/style.min.css')
-      .pipe(browserSync.stream());
-  });
+gulp.task('serve', ['sass', 'scripts', 'image-resize', 'sassdoc'], function() {
+    browserSync.init({
+        server: {
+            baseDir: "./"
+        },
+        open: true
+    });
+    gulp.watch(['scss/*.scss', 'scss/partials/*scss'], ['sass', 'sassdoc']);
+    gulp.watch("js/scripts/*.js", ['scripts']);
+    gulp.watch("*.html").on('change', browserSync.reload);
+    gulp.watch("js/main.min.js").on('change', browserSync.reload);
+    gulp.watch("img-source/*.{jpg,png,jpeg}", ['image-resize']);
+    // watch css and stream to BrowserSync when it changes
+    gulp.watch('css/style.min.css', function() {
+        gulp.src('css/style.min.css')
+            .pipe(browserSync.stream());
+    });
 });
 
 // Default Task
