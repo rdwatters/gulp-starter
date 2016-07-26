@@ -5,12 +5,12 @@ const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const browserSync = require('browser-sync').create();
 const concat = require('gulp-concat');
-const gplumber = require('gulp-plumber');
 const gutil = require('gulp-util');
 const imageResize = require('gulp-image-resize');
 const minifycss = require('gulp-minify-css');
 const os = require('os');
 const parallel = require("concurrent-transform");
+const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
@@ -18,20 +18,7 @@ const sassdoc = require('sassdoc');
 const sassFiles = 'scss/**/*.scss';
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
-// our custom error handler
-const errorHandler = function() {
-    // default appearance
-    return gplumber(function(error) {
-        // add indentation
-        var msg = error.codeFrame.replace(/\n/g, '\n    ');
-        // output styling
-        gutil.log('|- ' + gutil.colors.bgRed.bold('Build Error in ' + error.plugin));
-        gutil.log('|- ' + gutil.colors.bgRed.bold(error.message));
-        gutil.log('|- ' + gutil.colors.bgRed('>>>'));
-        gutil.log('|\n    ' + msg + '\n           |');
-        gutil.log('|- ' + gutil.colors.bgRed('<<<'));
-    });
-};
+
 
 gulp.task('sassdoc', function() {
     var options = {
@@ -48,7 +35,7 @@ gulp.task('sassdoc', function() {
 gulp.task('sass', () => {
     return gulp.src(sassFiles)
         .pipe(sourcemaps.init())
-        .pipe(sass({ outputStyle: 'expanded', errToConsole: true }))
+        .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
         .pipe(autoprefixer())
         .pipe(minifycss())
         .pipe(rename('style.min.css'))
@@ -57,24 +44,30 @@ gulp.task('sass', () => {
 });
 
 // Concatenate & Minify JS
+// .pipe(plumber())
 gulp.task('scripts', function() {
     return gulp.src('js/scripts/*js')
-        .pipe(errorHandler())
         .pipe(sourcemaps.init())
-        .pipe(concat('main.min.js'))
+        .pipe(concat('main.js'))
         .pipe(gulp.dest('js'))
         .pipe(babel({
             presets: ['es2015']
         }))
+        .on('error', function(e) {
+            console.log('>>> ERROR', e);
+            // emit here
+            this.emit('end');
+        })
         .pipe(uglify())
+        .pipe(rename('main.min.js'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('js'));
 });
 
 gulp.task("image-resize", function() {
-    return gulp.src("img-source/*.{jpg,png}")
+    return gulp.src("source-images/*.{jpg,png}")
         .pipe(parallel(
-            imageResize({ width: 1400 }),
+            imageResize({ width: 1200 }),
             os.cpus().length
         ))
         .pipe(gulp.dest("images"))
@@ -98,7 +91,7 @@ gulp.task('serve', ['sass', 'scripts', 'image-resize', 'sassdoc'], function() {
         },
         open: true
     });
-    gulp.watch(['scss/*.scss', 'scss/**/*scss'], ['sass','sassdoc']);
+    gulp.watch(['scss/*.scss', 'scss/**/*scss'], ['sass', 'sassdoc']);
     gulp.watch("js/scripts/*.js", ['scripts']);
     gulp.watch("*.html").on('change', browserSync.reload);
     gulp.watch("js/main.min.js").on('change', browserSync.reload);
@@ -112,3 +105,19 @@ gulp.task('serve', ['sass', 'scripts', 'image-resize', 'sassdoc'], function() {
 
 // Default Task
 gulp.task('default', ['serve']);
+
+// custom error handler used in 'scripts'
+
+// const errorHandler = function() {
+//     // default appearance
+//     return gplumber(function(error) {
+//         // add indentation
+//         var msg = error.codeFrame.replace(/\n/g, '\n    ');
+//         // output styling
+//         gutil.log('|- ' + gutil.colors.bgRed.bold('Build Error in ' + error.plugin));
+//         gutil.log('|- ' + gutil.colors.bgRed.bold(error.message));
+//         gutil.log('|- ' + gutil.colors.bgRed('>>>'));
+//         gutil.log('|\n    ' + msg + '\n           |');
+//         gutil.log('|- ' + gutil.colors.bgRed('<<<'));
+//     });
+// };

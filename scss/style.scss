@@ -26,5 +26,10 @@
 // 6. Themes
 @import 'themes/default';
 
-/*THE FOLLOWING IS JUST FOR GULP STARTER HOMEPAGE. DELETE AS NEEDED*/
+/*THE FOLLOWING IS JUST FOR THE GULP STARTER HOMEPAGE. DELETE AS NEEDED*/
 
+main[role=main] {
+	@include center;
+	width:90%;
+	max-width:$content-max-width;
+}

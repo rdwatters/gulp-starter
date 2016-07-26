@@ -1,0 +1,17 @@
+abrilfatface
+crimsontext
+fontawesome
+fonts.txt
+lato
+merriweather
+montserrat
+notoserif
+opensans
+playfairdisplay
+ptsans
+raleway
+roboto
+robotomono
+robotoslab
+sourcesanspro
+ubuntu
