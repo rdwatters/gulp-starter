@@ -1,4 +1,4 @@
-var gulp = require('gulp');
+const gulp = require('gulp');
 
 // Include Plugins
 const autoprefixer = require('gulp-autoprefixer');
@@ -35,7 +35,7 @@ const errorHandler = function() {
 
 gulp.task('sassdoc', function() {
     var options = {
-        dest: 'docs',
+        dest: 'sass-docs',
         verbose: true,
         basePath: 'https://github.com/rdwatters/gulp-starter/tree/master/scss'
     };
@@ -44,9 +44,9 @@ gulp.task('sassdoc', function() {
         .pipe(sassdoc(options));
 });
 
+// .pipe(errorHandler())
 gulp.task('sass', () => {
     return gulp.src(sassFiles)
-        .pipe(errorHandler())
         .pipe(sourcemaps.init())
         .pipe(sass({ outputStyle: 'expanded', errToConsole: true }))
         .pipe(autoprefixer())
@@ -98,7 +98,7 @@ gulp.task('serve', ['sass', 'scripts', 'image-resize', 'sassdoc'], function() {
         },
         open: true
     });
-    gulp.watch(['scss/*.scss', 'scss/partials/*scss'], ['sass', 'sassdoc']);
+    gulp.watch(['scss/*.scss', 'scss/**/*scss'], ['sass','sassdoc']);
     gulp.watch("js/scripts/*.js", ['scripts']);
     gulp.watch("*.html").on('change', browserSync.reload);
     gulp.watch("js/main.min.js").on('change', browserSync.reload);

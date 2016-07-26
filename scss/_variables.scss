@@ -6,11 +6,12 @@ $L:960px;
 $XL:1200px;
 $HUGE:1600px;
 
-
 //COLORS
 $base-font-color:#333333;
 $link-color: darken(red,25%);
 $link-color-event: darkent($link-color,15%);
+$link-event-text-decoration: none;
+$body-bg-color: darken(#ffffff,35%);
 
 //SETTING BREAKPOINTS FOR NEAT (see http://thoughtbot.github.io/neat-docs/latest/)
 $mobile: new-breakpoint(max-width $SM);
@@ -21,16 +22,20 @@ $extralarge: new-breakpoint(min-width $XL 4);
 $use-font-face-module:true;//required for first $font declaration
 $use-font-two: false;
 $use-font-three: false;
-$font: 'proximanova';
+$font: 'raleway';
 $font-two: 'futurapt';
 $font-three: 'courierprime';
+$use-font-awesome: 'true';
 
 //TYPOGRAPHY
 $base-font-size:16px;// sets 1em = 16px
 $base-font-family:$font,$helvetica;
 
 //BODY
-$body-bg-color: white;
+
+
+//BUTTONS
+$button-text-align:center;
 
 //INPUTS
 $placeholder-text-color: white;

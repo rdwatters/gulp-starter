@@ -1,50 +1,30 @@
 //Sass architecture (very) slightly modified from Sass guidelines: http://sass-guidelin.es/
 @charset 'UTF-8';
-
 // VENDOR
 @import 'bourbon/bourbon';
 @import 'neat/neat';
-
 // 1. Configuration and helpers
 @import 'variables';
 @import 'abstracts/mediaqueries';
 @import 'abstracts/functions';
 @import 'abstracts/mixins';
-
-
 // 2. Base styles
 @import 'base/normalize';
 @import 'base/base';
 @import 'base/fonts';
+//Needs $use-font-awesome: true in "_variables.scss"
+@import 'base/fontawesome';
 @import 'base/typography';
-@import 'base/helpers'; //helper classes (may not be necessary with Bourbon/neat)
-
+@import 'base/helpers';
 // 3. Layout-related sections
 @import 'layout/header';
 @import 'layout/footer';
-
 // 4. Components
-// @import 'components/buttons';
-
+@import 'components/buttons';
 // 5. Page-specific styles
 @import 'pages/home';
-
 // 6. Themes
 @import 'themes/default';
 
-//For gulp starter homepage. Delete as needed.
-//
+/*THE FOLLOWING IS JUST FOR GULP STARTER HOMEPAGE. DELETE AS NEEDED*/
 
-body {
-	background-color: darken(#ffffff,10%);
-}
-
-main.main {
-  width: 90%;
-  max-width: 35em;
-  @include center;
-  a {
-    color: $link-color;
-    text-decoration: underline;
-  }
-}

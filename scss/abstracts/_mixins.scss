@@ -10,7 +10,8 @@
     &:focus {
       @content;
     }
-  } @else {
+  }
+  @else {
     &:hover,
     &:active,
     &:focus {
@@ -32,7 +33,6 @@
 ///     margin-left: auto;
 ///   }
 ///
-
 @mixin center {
   display: block;
   margin-right: auto;
@@ -63,14 +63,160 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  } @else if ($horizontal) {
+  }
+  @else if ($horizontal) {
     left: 50%;
     transform: translate(-50%, 0);
-  } @else if ($vertical) {
+  }
+  @else if ($vertical) {
     top: 50%;
     transform: translate(0, -50%);
   }
 }
 
+@mixin card ($bgcolor: $body-bg-color) {
+  i {
+    width: 100%;
+    text-align: center; //centers icons for font-awesome
+    @include center;
+  }
+  i + h1 {
+    text-align: center;
+  }
+  i + p,
+  i + h1 + p {
+    font-size: 1.3em;
+    line-height: 1.5;
+    text-align: center;
+  }
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .12),
+  0 1px 2px rgba(0, 0, 0, .24);
+  transition: all .3s cubic-bezier(.25, .8, .25, 1);
+  background-color: $bgcolor;
+  &:hover {
+    transition: box-shadow .2s cubic-bezier(.4, 0, .2, 1);
+    box-shadow: 0 19px 38px rgba(0, 0, 0, .3), 0 15px 9pt rgba(0, 0, 0, .22);
+  }
+}
 
+@mixin flexlist($el: '', $minheight: 6em, $gutter: 10px, $bgcolor: white, $usecard: false) {
+  ul#{$el} {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-shrink: 0;
+    flex-grow: 1;
+    justify-content: space-between;
+    li {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      min-height: $minheight;
+      margin-bottom: $gutter;
+      background-color: $bgcolor;
+      padding-bottom: 1em;
+      @include MQ(M) {
+        width: calc(50% - #{$gutter}/2);
+        max-width: calc(50% - #{$gutter}/2);
+        &:nth-child(odd) {
+          margin-right: $gutter;
+        }
+      }
+      @include MQ(L) {
+        &:nth-child(odd) {
+          margin-right: 0px;
+        }
+        width: calc(50% - #{$gutter} * .6666);
+        max-width: calc(50% - #{$gutter} * .6666);
+        margin-right: #{$gutter}/2;
+      }
+      header {
+        padding: 1em;
+      }
+      section {
+        padding: 1em;
+        > header {
+          padding: 0em;
+        }
+      }
+      i + h1 {
+        align-self: flex-end;
+        font-size: 2.5em;
+        text-align: center;
+      }
+      i + h1 + p,
+      i + p {
+        text-align: center;
+        line-height: 1.5;
+        padding: {
+          left: 2.5em;
+          right: 2.5em;
+        }
+        font-size:1.3em;
+      }
+      @if $usecard {
+        @include card($bgcolor: $bgcolor);
+      }
+    }
+  }
+}
 
+@mixin flexlistlayout( $layout:'', $el:'', $justify: space-between, $bgcolor: white, $gutter: 0px, $usecard: false) {
+  ul#{$el} {
+    @if $layout=="onethreetwo" {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: $justify;
+      li {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        margin-bottom: $gutter;
+        padding-bottom: 1em;
+        background-color: $bgcolor;
+        img {
+          align-self:flex-start;
+        }
+        @if $usecard {
+          @include card($bgcolor: $bgcolor);
+        }
+        header {
+          padding: 1em;
+        }
+        section {
+          padding: 1em;
+          > header {
+            padding: 0em;
+          }
+        }
+      }
+      @include MQ(M) {
+        li:first-child {
+          min-width: 100%;
+          width: 100%;
+          max-width: 100%;
+        }
+        li:not(:first-child) {
+          width:calc(50% - #{$gutter}/2);
+          max-width:calc(50% - #{$gutter}/2);
+        }
+      }
+      @include MQ(L) {
+        li:not(:first-child) {
+          width: calc(33.333% - #{$gutter} * .666666);
+          max-width: calc(33.333% - #{$gutter} * .666666);
+        }
+        li:nth-of-type(5),
+        li:nth-of-type(6) {
+          min-width: calc(50% - #{$gutter}/2);
+          width: calc(50% - #{$gutter}/2);
+          max-width: calc(50% - #{$gutter}/2);
+        }
+      }
+    }
+    @else if $layout=="onethreeone" {}
+  }
+}

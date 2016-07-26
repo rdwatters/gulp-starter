@@ -1,16 +1,16 @@
-// -----------------------------------------------------------------------------
-// This file contains very basic styles.
-// -----------------------------------------------------------------------------
+@charset "UTF-8";
 
 /**
  * Set up a decent box model on the root element
  */
 html {
   box-sizing: border-box;
+  font-family: $base-font-family;
 }
 
 body {
 	color:$base-font-color;
+	font-family: $base-font-family;
 }
 
 /**
@@ -28,6 +28,22 @@ a {
   text-decoration: none;
   @include on-event {
     color: $link-color-event;
-    text-decoration: underline;
+    text-decoration: $link-event-text-decoration;
   }
+}
+
+img {
+  width:100%;
+  height:auto;
+}
+
+ul,li {
+  list-style:none;
+  margin:0px;
+  padding:0px;
+}
+
+p {
+  margin-bottom:1em;
+  margin-top:0px;
 }
