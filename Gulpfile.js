@@ -22,7 +22,7 @@ const uglify = require('gulp-uglify');
 
 gulp.task('sassdoc', function() {
     var options = {
-        dest: 'sass-docs',
+        dest: 'docs',
         verbose: true,
         basePath: 'https://github.com/rdwatters/gulp-starter/tree/master/scss'
     };
@@ -65,7 +65,7 @@ gulp.task('scripts', function() {
 });
 
 gulp.task("image-resize", function() {
-    return gulp.src("source-images/*.{jpg,png}")
+    return gulp.src("source-images/*.{jpg,png,jpeg}")
         .pipe(parallel(
             imageResize({ width: 1200 }),
             os.cpus().length
@@ -77,7 +77,7 @@ gulp.task("image-resize", function() {
         ))
         .pipe(gulp.dest("images/half"))
         .pipe(parallel(
-            imageResize({ width: 300 }),
+            imageResize({ width: 200 }),
             os.cpus().length
         ))
         .pipe(gulp.dest("images/thumbs"));
@@ -94,8 +94,8 @@ gulp.task('serve', ['sass', 'scripts', 'image-resize', 'sassdoc'], function() {
     gulp.watch(['scss/*.scss', 'scss/**/*scss'], ['sass', 'sassdoc']);
     gulp.watch("js/scripts/*.js", ['scripts']);
     gulp.watch("*.html").on('change', browserSync.reload);
+    gulp.watch("source-images/*.{jpg,png,jpeg}").on('change', ['image-resize', browserSync.reload]);
     gulp.watch("js/main.min.js").on('change', browserSync.reload);
-    gulp.watch("img-source/*.{jpg,png,jpeg}", ['image-resize']);
     // watch css and stream to BrowserSync when it changes
     gulp.watch('css/style.min.css', function() {
         gulp.src('css/style.min.css')
