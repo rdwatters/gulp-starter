@@ -6,6 +6,7 @@ const babel = require('gulp-babel');
 const browserSync = require('browser-sync').create();
 const concat = require('gulp-concat');
 const gutil = require('gulp-util');
+const imagemin = require('gulp-imagemin');
 const imageResize = require('gulp-image-resize');
 const minifycss = require('gulp-minify-css');
 const os = require('os');
@@ -66,6 +67,7 @@ gulp.task('scripts', function() {
 
 gulp.task("image-resize", function() {
     return gulp.src("source-images/*.{jpg,png,jpeg}")
+        .pipe(imagemin())
         .pipe(parallel(
             imageResize({ width: 1200 }),
             os.cpus().length
@@ -94,7 +96,7 @@ gulp.task('serve', ['sass', 'scripts', 'image-resize', 'sassdoc'], function() {
     gulp.watch(['scss/*.scss', 'scss/**/*scss'], ['sass', 'sassdoc']);
     gulp.watch("js/scripts/*.js", ['scripts']);
     gulp.watch("*.html").on('change', browserSync.reload);
-    gulp.watch("source-images/*.{jpg,png,jpeg}").on('change', ['image-resize', browserSync.reload]);
+    gulp.watch("source-images/*.{jpg,png,jpeg}", ['image-resize']);
     gulp.watch("js/main.min.js").on('change', browserSync.reload);
     // watch css and stream to BrowserSync when it changes
     gulp.watch('css/style.min.css', function() {
