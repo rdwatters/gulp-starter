@@ -38,6 +38,7 @@ gulp.task('sass', () => {
         .pipe(sourcemaps.init())
         .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
         .pipe(autoprefixer())
+        .pipe(gulp.dest('css/'))
         .pipe(minifycss())
         .pipe(rename('style.min.css'))
         .pipe(sourcemaps.write('css/'))
