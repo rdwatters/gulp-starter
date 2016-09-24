@@ -12,6 +12,7 @@ html {
 body {
   color: $base-font-color;
   font-family: $base-font-family;
+  font-weight: $base-font-weight;
 }
 
 h1,
@@ -46,11 +47,6 @@ a {
     color: $link-color-event;
     text-decoration: $link-event-text-decoration;
   }
-}
-
-img {
-  width: 100%;
-  height: auto;
 }
 
 ul,

@@ -39,6 +39,12 @@
   margin-left: auto;
 }
 
+@mixin content {
+  @extends center {
+    max-width:800px;
+  }
+}
+
 /// Will center the element vertically, horizontally, or both (default). Note that element will be centered in relation to nearest `position: relative;` parent element.
 /// @access public
 /// @param {Bool} $horizontal [true]

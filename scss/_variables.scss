@@ -6,12 +6,31 @@ $L:960px;
 $XL:1200px;
 $HUGE:1600px;
 
+//GRID
+$grid-columns: 10 !global;
+
+//Primary
+$cap-blue: rgb(0,154,191); //#009bbf
+$cap-gray: rgb(195,198,200); //#c3c7ca
+$cap-red: rgb(178,30,40); //#b41f28
+$cap-black: rgb(0,0,0); //#000000
+
+//Secondary
+$cap-orange: rgb(222,139,5); //#de8d28
+$cap-green: rgb(69,161,66); //#44a448
+$cap-purple: rgb(89,44,130); //#592c82
+
 //COLORS
 $base-font-color:#333333;
 $link-color: darken(red,25%);
 $link-color-event: darkent($link-color,15%);
 $link-event-text-decoration: none;
 $body-bg-color: darken(#ffffff,35%);
+
+$brand-primary:$cap-blue;
+$brand-secondary:$cap-green;
+$brand-accent:$cap-red;
+$warning:$brand-accent;
 
 //BREAKPOINTS FOR NEAT (http://thoughtbot.github.io/neat-docs/latest/)
 $mobile: new-breakpoint(max-width $SM);
@@ -20,28 +39,31 @@ $desktop: new-breakpoint(min-width $L 4);
 $extralarge: new-breakpoint(min-width $XL 4);
 
 $use-font-face-module:true;//required for first $font declaration
-$use-font-two: false;
+$use-font-two: true;
 $use-font-three: false;
-$font: 'arial';
-$font-two: 'futurapt';
-$font-three: 'courierprime';
-$use-font-awesome: 'true';
+$font: 'raleway';
+$font-two: 'robotoslab';
+$font-three: '';
+$use-font-awesome: 'false';
 
 //TYPOGRAPHY
 $base-font-size:16px;
 $base-font-family:$font,$helvetica;
-$heading-font-family:$base-font-family;
+$base-font-weight:100;
+$heading-font-family:$font-two,$georgia;
 
 //BUTTONS
 $button-text-align:center;
 
 //CONTENT
-$content-max-width: 760px;
+$content-max-width: 800px;
+$max-width:100vw;//see neat documentation: http://thoughtbot.github.io/neat-docs/latest/#max-width
 
 //INPUTS
 $placeholder-text-color: white;
 $placeholder-text-opacity: 1;
 $placeholder-text-font-size: 12px;
+
 
 //SOCIAL MEDIA COLORS
 $twitter:#00aced;
