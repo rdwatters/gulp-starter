@@ -3,6 +3,7 @@ build:
   steps:
     - npm-install
     - hgen/gulp@0.1.3
+      tasks: gulp images
   - script:
     name: echo nodejs information
     code: |
