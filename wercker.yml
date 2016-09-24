@@ -1,7 +1,6 @@
 box: node
 build:
   steps:
-    - npm-install
     - hgen/gulp@0.1.3
       tasks: images
   - script:
