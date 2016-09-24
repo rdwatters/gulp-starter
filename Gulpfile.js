@@ -108,6 +108,7 @@ gulp.task('serve', ['sass', 'scripts', 'image-resize', 'sassdoc'], function() {
 
 // Default Task
 gulp.task('default', ['serve']);
+gulp.task('images', ['image-resize']);
 
 // custom error handler used in 'scripts'
 
